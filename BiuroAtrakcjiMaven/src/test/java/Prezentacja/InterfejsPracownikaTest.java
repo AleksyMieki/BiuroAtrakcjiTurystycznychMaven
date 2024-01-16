@@ -40,11 +40,6 @@ class InterfejsPracownikaTest implements TestExecutionExceptionHandler {
         instance = new InterfejsPracownika();
         daneTestowe = new DaneTestowe();
     }
-
-    //TestMethodOrder(OrderAnnotation.class) i Order,
-
-
-
     static Stream<Atrakcja> atrakcjaProvider() {
         return Stream.of(new Atrakcja("A", 0.12F, "", "Wrocław"),
                 new Atrakcja("B", 0.18F, "2013-12-22 12:12:12", "Wrocław"),
