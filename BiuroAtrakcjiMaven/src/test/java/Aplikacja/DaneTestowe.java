@@ -16,4 +16,8 @@ public class DaneTestowe {
             "prośba o zwrot biletu na atrakcję", true,
             "proszę bardzo o ZWROT BILETU", true
     );
+
+    String[] maile ={"niemail", null, "cos@gmail.pl", "sadada@asdasd.pl"};
+    String[] tytulyMaili = {null, "cos", "zwrot biletu"};
+    String[] tresciMaili ={null, "dzien dobry"};
 }

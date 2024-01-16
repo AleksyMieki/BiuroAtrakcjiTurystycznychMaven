@@ -19,16 +19,16 @@ public class Aplikacja {
         return instance;
     }
 
-    private Aplikacja()
-    {
-        Dane dane = new Dane("piza",1,"aaa","aaa");
-        Dane dane2 = new Dane("luwr",1,"aaa","aaa");
-        Dane dane3 = new Dane("mona",1,"aaa","aaa");
+    private Aplikacja() {
+        Dane dane = new Dane("piza", 1, "aaa", "aaa");
+        Dane dane2 = new Dane("luwr", 1, "aaa", "aaa");
+        Dane dane3 = new Dane("mona", 1, "aaa", "aaa");
         listaAtrakcji.add(new Atrakcja(dane));
         listaAtrakcji.add(new Atrakcja(dane2));
         listaAtrakcji.add(new Atrakcja(dane3));
-        Zgloszenie zgloszenie = new Zgloszenie("zwrot biletu", "a@.pl",1,"tresc wiadomosci numer 1", "12.12.2023");
-        Zgloszenie zgloszenie2 = new Zgloszenie("kiedy otwarcie", "a@.pl",2,"tresc wiadomosci numer 2", "12.12.2023");
+        Zgloszenie zgloszenie = new Zgloszenie("zwrot biletu", "a@.pl", 1, "tresc wiadomosci numer 1", "2023-12-02 00:00:00");
+        Zgloszenie zgloszenie2 = new Zgloszenie("czy jest promka?", "a@.pl", 2, "tresc wiadomosci numer 2", "2023-12-02 00:00:00");
+        Zgloszenie zgloszenie3 = new Zgloszenie("kiedy otwarcie", "a@.pl", 3, "tresc wiadomosci numer 3", "2024-01-02 00:00:00");
 
         kasaBiletowa.kupBilet(listaAtrakcji.get(0));
         kasaBiletowa.kupBilet(listaAtrakcji.get(1));
@@ -53,7 +53,7 @@ public class Aplikacja {
 
     public boolean sprawdzPoprawnosc(Dane dane) {
 
-        if(dane.getLokalizacja() == "luwr" || dane.getLokalizacja() == "Paryz") return true;
+        if (dane.getLokalizacja() == "luwr" || dane.getLokalizacja() == "Paryz") return true;
 
         return false;
     }
@@ -74,8 +74,11 @@ public class Aplikacja {
         atrakcja.setLokalizacja(daneDoEdycji.getLokalizacja());
     }
 
-    public Zgloszenie getZgloszenieById(int id)
-    {
+    public Zgloszenie getZgloszenieById(int id) {
+        if (id < 0 || id > this.listaZgloszen.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+
         Zgloszenie znalezioneZgloszenie = listaZgloszen.stream()
                 .filter(zgloszenie -> id == zgloszenie.getId())
                 .findAny()
@@ -84,23 +87,22 @@ public class Aplikacja {
         return znalezioneZgloszenie;
     }
 
-    public void utworzZgloszenie(String email, String temat, String wiadomosc)
-    {
+    public void utworzZgloszenie(String email, String temat, String wiadomosc) {
+        if (email == null || (temat == null) || (wiadomosc == null)) {
+            throw new NullPointerException();
+        }
         SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dataWyslania = data.format(new Date());
-
-        Zgloszenie zgloszenie = new Zgloszenie(temat,email,listaZgloszen.size()+1 , wiadomosc ,dataWyslania);
-
+        Zgloszenie zgloszenie = new Zgloszenie(temat, email, listaZgloszen.size() + 1, wiadomosc, dataWyslania);
         listaZgloszen.add(zgloszenie);
-
         menedzerWiadomosci.wyslijWiadomosc(zgloszenie);
 
     }
 
     public void utworzAtrakcje(Dane atrybutyAtrakcji) {
 
-        Atrakcja atrakcja = new Atrakcja(atrybutyAtrakcji.getNazwa(),atrybutyAtrakcji.getCena(),
-                atrybutyAtrakcji.getDataAtrakcji(),atrybutyAtrakcji.getLokalizacja());
+        Atrakcja atrakcja = new Atrakcja(atrybutyAtrakcji.getNazwa(), atrybutyAtrakcji.getCena(),
+                atrybutyAtrakcji.getDataAtrakcji(), atrybutyAtrakcji.getLokalizacja());
 
         listaAtrakcji.add(atrakcja);
 
