@@ -41,10 +41,8 @@ class InterfejsPracownikaTest implements TestExecutionExceptionHandler {
         daneTestowe = new DaneTestowe();
     }
 
-    //Assertions biblioteki JUnit 5 oraz
     //adnotacje: Test, dobraną adnotację
     //TestMethodOrder(OrderAnnotation.class) i Order,
-    //ExtendWith razem z obsługą wyjtąków np. TestExecutionExceptionHandler.
 
     static Stream<Atrakcja> atrakcjaProvider() {
         return Stream.of(new Atrakcja("A", 0.12F, "", "Wrocław"),

@@ -23,7 +23,7 @@ public class KasaBiletowa {
 
         long timeDifference = dataNaBilecie.getTime() - teraz.getTime();
         // o choldera - te modulo przerzuca ujemne wartosci w dodatnie
-        long roznicaDni = ((timeDifference / (1000*60*60*24)+365) % 365);
+        long roznicaDni = ((timeDifference / (1000*60*60*24)) % 365);
 
         if(roznicaDni > 0)
         {
