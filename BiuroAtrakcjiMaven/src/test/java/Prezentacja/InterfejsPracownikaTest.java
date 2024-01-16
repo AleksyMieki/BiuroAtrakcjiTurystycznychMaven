@@ -2,9 +2,7 @@ package Prezentacja;
 
 import Aplikacja.Atrakcja;
 import Aplikacja.DaneTestowe;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestExecutionExceptionHandler;
@@ -21,6 +19,7 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
 class InterfejsPracownikaTest implements TestExecutionExceptionHandler {
     static InterfejsUzytkownika instance;
@@ -42,9 +41,8 @@ class InterfejsPracownikaTest implements TestExecutionExceptionHandler {
         daneTestowe = new DaneTestowe();
     }
 
-    //adnotacje: Test, dobraną adnotację
-    //danetestowe
     //TestMethodOrder(OrderAnnotation.class) i Order,
+
 
 
     static Stream<Atrakcja> atrakcjaProvider() {
@@ -53,6 +51,7 @@ class InterfejsPracownikaTest implements TestExecutionExceptionHandler {
                 null);
     }
 
+    @Order(3)
     @ParameterizedTest
     @ExtendWith(InterfejsPracownikaTest.class)
     @MethodSource("atrakcjaProvider")
@@ -75,6 +74,9 @@ class InterfejsPracownikaTest implements TestExecutionExceptionHandler {
             "piotr.@gmail.com\rpiotr@gmddail.com,prosze o pilny zwrot biletu,skandal ze wam nie wstyd!!,blad,-29", //out of bounds
             "piotr.@gmail.com\rpiotr@gmddail.com,prosze o pilny zwrot biletu,skandal ze wam nie wstyd!!,blad,129", //out of bounds
     })
+
+    @Order(2)
+
     // wynik moze być tylko: "zgloszenie" lub "zwrot"
     void testWyslijZapytanieDoPracownikaWysylka(String mail, String temat, String tresc, String wynik, String idBiletu) {
         //przygotowanie danych
@@ -128,6 +130,8 @@ class InterfejsPracownikaTest implements TestExecutionExceptionHandler {
             }
         }
     }
+
+    @Order(1)
 
     @Test
     void testCzyKupicBilet() {
