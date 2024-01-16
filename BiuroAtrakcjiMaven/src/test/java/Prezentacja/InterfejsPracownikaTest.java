@@ -69,8 +69,8 @@ class InterfejsPracownikaTest implements TestExecutionExceptionHandler {
     @ParameterizedTest
     @CsvSource({
 //           "piotr.@gmail.com\rpiotr@gmail.com,Lubie wasze atrakcje,Sa super,zgloszenie,",
-            "piotr.@gmail.com\rpiotr@gmddail.com,prosze o pilny zwrot biletu,skandal ze wam nie wstyd!!,zwrot,1", //atrakcja za mniej niz 24h
-            "piotr.@gmail.com\rpiotr@gmddail.com,prosze o pilny zwrot biletu,skandal ze wam nie wstyd!!,zgloszenie,2", //zwroci sie bilet
+            "piotr.@gmail.com\rpiotr@gmddail.com,prosze o pilny zwrot biletu,skandal ze wam nie wstyd!!,zgloszenie,1", //atrakcja za mniej niz 24h
+            "piotr.@gmail.com\rpiotr@gmddail.com,prosze o pilny zwrot biletu,skandal ze wam nie wstyd!!,zwrot,2", //zwroci sie bilet
             "piotr.@gmail.com\rpiotr@gmddail.com,prosze o pilny zwrot biletu,skandal ze wam nie wstyd!!,blad,-29", //out of bounds
             "piotr.@gmail.com\rpiotr@gmddail.com,prosze o pilny zwrot biletu,skandal ze wam nie wstyd!!,blad,129", //out of bounds
     })
