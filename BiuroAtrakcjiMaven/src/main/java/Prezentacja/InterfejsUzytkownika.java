@@ -143,10 +143,7 @@ public class InterfejsUzytkownika {
         return scanner.nextLine();
     }
 
-    private boolean czyKupicBilet() {
-
-
-
+    public boolean czyKupicBilet() {
         System.out.println("""
 						Czy kupić bilet?
 						1. tak

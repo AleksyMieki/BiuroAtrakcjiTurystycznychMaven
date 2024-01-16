@@ -20,4 +20,8 @@ public class DaneTestowe {
     String[] maile ={"niemail", null, "cos@gmail.pl", "sadada@asdasd.pl"};
     String[] tytulyMaili = {null, "cos", "zwrot biletu"};
     String[] tresciMaili ={null, "dzien dobry"};
+
+    public String[] userInputCzyKupicBilet = {"tak","jeszcze jak!","nie","...jakie było pytanie?", "1", "0", "-1"};
+    public Boolean[] userInputCzyKupicBiletWynik = {false,false,false,false,true,false,false};
+
 }

@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Stream;
@@ -42,7 +43,9 @@ class InterfejsPracownikaTest implements TestExecutionExceptionHandler {
     }
 
     //adnotacje: Test, dobraną adnotację
+    //danetestowe
     //TestMethodOrder(OrderAnnotation.class) i Order,
+
 
     static Stream<Atrakcja> atrakcjaProvider() {
         return Stream.of(new Atrakcja("A", 0.12F, "", "Wrocław"),
@@ -66,13 +69,13 @@ class InterfejsPracownikaTest implements TestExecutionExceptionHandler {
     @ExtendWith(InterfejsPracownikaTest.class)
     @ParameterizedTest
     @CsvSource({
-           "piotr.@gmail.com\rpiotr@gmail.com,Lubie wasze atrakcje,Sa super,zgloszenie,",
+            "piotr.@gmail.com\rpiotr@gmail.com,Lubie wasze atrakcje,Sa super,zgloszenie,",
             "piotr.@gmail.com\rpiotr@gmddail.com,prosze o pilny zwrot biletu,skandal ze wam nie wstyd!!,zgloszenie,2", //atrakcja za mniej niz 24h
             "piotr.@gmail.com\rpiotr@gmddail.com,prosze o pilny zwrot biletu,skandal ze wam nie wstyd!!,zwrot,3", //zwroci sie bilet
             "piotr.@gmail.com\rpiotr@gmddail.com,prosze o pilny zwrot biletu,skandal ze wam nie wstyd!!,blad,-29", //out of bounds
             "piotr.@gmail.com\rpiotr@gmddail.com,prosze o pilny zwrot biletu,skandal ze wam nie wstyd!!,blad,129", //out of bounds
     })
-        // wynik moze być tylko: "zgloszenie" lub "zwrot"
+    // wynik moze być tylko: "zgloszenie" lub "zwrot"
     void testWyslijZapytanieDoPracownikaWysylka(String mail, String temat, String tresc, String wynik, String idBiletu) {
         //przygotowanie danych
         String doKonsoli = idBiletu == null ? String.join("\r", mail, temat, tresc) : String.join("\r", mail, temat, idBiletu, tresc);
@@ -107,7 +110,7 @@ class InterfejsPracownikaTest implements TestExecutionExceptionHandler {
                     assertTrue(wystepowanieBiletuNaPoczatku);
                     assertFalse(wystepowanieBiletuNaKoncu);
                     assertTrue((outputStream.toString().contains("Zwrocono bilet poprzez zwroc bilet")));
-                    assertFalse((outputStream.toString().contains("wyslano wiadomosc o podanej tresci ") ));
+                    assertFalse((outputStream.toString().contains("wyslano wiadomosc o podanej tresci ")));
 //                    assertFalse((outputStream.toString().contains("wyslano wiadomosc o podanej tresci ") && (outputStream.toString().endsWith(tresc + "\r\n") || outputStream.toString().endsWith(tresc + "\n"))));
                 } else {
                     // wyslano prosbe o zwrot biletu kupionego wczesniej niz 24h temu
@@ -119,10 +122,32 @@ class InterfejsPracownikaTest implements TestExecutionExceptionHandler {
                 }
             } else {
                 // wyslano wiadomosc nie na temat zwrotow
-                assertTrue((outputStream.toString().contains("wyslano wiadomosc o podanej tresci ") ));
+                assertTrue((outputStream.toString().contains("wyslano wiadomosc o podanej tresci ")));
 //                assertTrue((outputStream.toString().contains("wyslano wiadomosc o podanej tresci ") && (outputStream.toString().endsWith(tresc + "\r\n") || outputStream.toString().endsWith(tresc + "\n"))));
                 assertFalse((outputStream.toString().contains("Zwrocono bilet poprzez zwroc bilet")));
             }
         }
     }
+
+    @Test
+    void testCzyKupicBilet() {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        String doKonsoli = String.join("\r", daneTestowe.userInputCzyKupicBilet);
+
+        ByteArrayInputStream testIn = new ByteArrayInputStream(doKonsoli.getBytes());
+        System.setIn(testIn);
+        Scanner scanner = new Scanner(System.in);
+        instance = new InterfejsUzytkownika(scanner);
+
+        boolean wynik;
+        for (int i = 0; i < daneTestowe.userInputCzyKupicBilet.length; i++) {
+            wynik = instance.czyKupicBilet();
+            assertEquals(wynik, daneTestowe.userInputCzyKupicBiletWynik[i]);
+        }
+
+    }
+
+
 }

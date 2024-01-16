@@ -13,7 +13,6 @@ public class Dane {
      * @param lokalizacja
      */
     public Dane(String nazwa, float cena, String dataAtrakcji, String lokalizacja) {
-
         this.nazwa = nazwa;
         this.cena = cena;
         this.dataAtrakcji = dataAtrakcji;
