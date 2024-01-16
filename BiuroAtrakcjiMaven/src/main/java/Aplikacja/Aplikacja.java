@@ -20,9 +20,9 @@ public class Aplikacja {
     }
 
     private Aplikacja() {
-        Dane dane = new Dane("piza", 1, "aaa", "aaa");
-        Dane dane2 = new Dane("luwr", 1, "aaa", "aaa");
-        Dane dane3 = new Dane("mona", 1, "aaa", "aaa");
+        Dane dane = new Dane("piza", 1, "2023-12-03 10:00:00", "aaa");
+        Dane dane2 = new Dane("luwr", 1, "2024-01-17 13:00:00", "aaa");
+        Dane dane3 = new Dane("mona", 1, "2023-01-17 14:00:00", "aaa");
         listaAtrakcji.add(new Atrakcja(dane));
         listaAtrakcji.add(new Atrakcja(dane2));
         listaAtrakcji.add(new Atrakcja(dane3));

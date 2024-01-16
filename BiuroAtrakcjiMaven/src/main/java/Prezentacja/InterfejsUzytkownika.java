@@ -78,12 +78,10 @@ public class InterfejsUzytkownika {
         boolean mniejNizDoba;
 
         do {
-
             System.out.println("Podaj swojego maila");
             email = podajMaila();
             System.out.println(email);
             poprawny = aplikacja.menedzerWiadomosci.sprawdzenieMaila(email);
-
         }while(poprawny == false);
 
         System.out.println("Podaj temat wiadomosci(jesli chcesz zwrocic bilet wpisz zwrot biletu)");
@@ -102,8 +100,7 @@ public class InterfejsUzytkownika {
 
             if(znalezionyBilet == null)
             {
-                System.out.println("nie istnieje taki bilet");
-                return;
+                throw new NullPointerException();
             }
 
             mniejNizDoba = aplikacja.kasaBiletowa.sprawdzDateWydarzenia(znalezionyBilet);
