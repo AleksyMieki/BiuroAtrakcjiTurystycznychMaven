@@ -13,10 +13,12 @@ import java.util.stream.IntStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class AplikacjaTest implements TestExecutionExceptionHandler {
+public class AplikacjaTest implements TestExecutionExceptionHandler {
     static Aplikacja instance;
     static DaneTestowe daneTestowe;
+
 
     @Override
     public void handleTestExecutionException(ExtensionContext context, Throwable throwable)
@@ -40,6 +42,7 @@ class AplikacjaTest implements TestExecutionExceptionHandler {
     // TestMethodOrder(OrderAnnotation.class) i  Order,
 
     @Order(1)
+    @Tag("tworzenie")
     @ParameterizedTest
     @CsvSource({"niemail", ",", "cos@gmail.pl", "sadada@asdasd.pl"})
     @ExtendWith(AplikacjaTest.class)
@@ -64,6 +67,7 @@ class AplikacjaTest implements TestExecutionExceptionHandler {
 
 
     @Order(2)
+    @Tag("tworzenie")
     @Test
     void testyUtworzZgloszenieCzasiID() {
         // sprawdza spójnosc danych (zgloszenie o wiekszym id jest wyslane pozniej)

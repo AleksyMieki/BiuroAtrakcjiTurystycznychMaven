@@ -53,4 +53,8 @@ public class KasaBiletowa {
                 .orElse(null);
         return biletDoZwrotu;
     }
+
+    public ArrayList<Bilet> getListaBiletow() {
+        return listaBiletow;
+    }
 }

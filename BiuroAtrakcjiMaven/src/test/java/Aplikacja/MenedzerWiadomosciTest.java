@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MenedzerWiadomosciTest implements TestExecutionExceptionHandler {
+public class MenedzerWiadomosciTest implements TestExecutionExceptionHandler {
 
     static DaneTestowe daneTestowe;
     static MenedzerWiadomosci instance;
@@ -60,7 +60,8 @@ class MenedzerWiadomosciTest implements TestExecutionExceptionHandler {
         System.setOut(new PrintStream(outputStream));
         instance.wyslijWiadomosc(zgloszenie);
         System.setOut(System.out);
-        assertEquals("wyslano wiadomosc o podanej tresci " + zgloszenie.getTrescWiadomosci() + "\r\n", outputStream.toString());
+//        assertEquals("wyslano wiadomosc o podanej tresci " + zgloszenie.getTrescWiadomosci() + "\r\n", outputStream.toString());
+        assertEquals("wyslano wiadomosc o podanej tresci " + zgloszenie.getTrescWiadomosci() + "\n", outputStream.toString());
     }
 
     @ParameterizedTest
