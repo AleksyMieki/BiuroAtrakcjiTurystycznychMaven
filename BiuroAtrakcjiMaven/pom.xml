@@ -20,6 +20,12 @@
             <version>1.49</version> <!-- Use the latest version available -->
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <version>1.8.2</version> <!-- Use the latest version -->
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <packaging>jar</packaging>
     <properties>
