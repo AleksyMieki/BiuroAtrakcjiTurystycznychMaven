@@ -4,11 +4,19 @@ import Aplikacja.*;
 import java.util.Scanner;
 
 public class InterfejsUzytkownika {
+    public InterfejsUzytkownika(){
+
+    }
+
+    Scanner scanner = new Scanner(System.in);
+    public InterfejsUzytkownika(Scanner scanner){
+        this.scanner = scanner;
+    }
     private boolean czyZalogowany = false;
     protected Aplikacja aplikacja = Aplikacja.getInstance();
     private void zaloguj() {
 
-        Scanner scanner = new Scanner(System.in);
+
         String haslo = "";
 
         haslo = scanner.nextLine();
@@ -44,7 +52,7 @@ public class InterfejsUzytkownika {
         return znalezionaAtrakcja;
     }
 
-    private void wyswietlDaneAtrakcji(Atrakcja atrakcja)
+    public void wyswietlDaneAtrakcji(Atrakcja atrakcja)
     {
         if(atrakcja != null) {
             System.out.println("OTO DANE ATRAKCJI");
@@ -54,11 +62,11 @@ public class InterfejsUzytkownika {
             System.out.println(atrakcja.getLokalizacja());
         }
         else{
-            System.out.println("nie znaleziono atrakcji o podanej nazwie");
+            throw new NullPointerException();
         }
     }
 
-    private void wyslijZapytanieDoPracownika() {
+    public void wyslijZapytanieDoPracownika() {
 
         Bilet znalezionyBilet;
         String wiadomosc;
@@ -73,6 +81,7 @@ public class InterfejsUzytkownika {
 
             System.out.println("Podaj swojego maila");
             email = podajMaila();
+            System.out.println(email);
             poprawny = aplikacja.menedzerWiadomosci.sprawdzenieMaila(email);
 
         }while(poprawny == false);
@@ -80,6 +89,7 @@ public class InterfejsUzytkownika {
         System.out.println("Podaj temat wiadomosci(jesli chcesz zwrocic bilet wpisz zwrot biletu)");
 
         temat = podajTemat();
+        System.out.println(temat);
         czyZwrot = aplikacja.menedzerWiadomosci.sprawdzenieTematu(temat);
 
         if(czyZwrot)
@@ -109,37 +119,36 @@ public class InterfejsUzytkownika {
         wiadomosc = podajTrescWiadomosci();
 
         aplikacja.utworzZgloszenie(temat,email,wiadomosc);
-
     }
 
     private String podajMaila() {
-        Scanner scanner = new Scanner(System.in);
+
         return scanner.nextLine();
     }
 
     private String podajTemat()
     {
-        Scanner scanner = new Scanner(System.in);
+
         return scanner.nextLine();
     }
 
     private int podajNumerBiletu() {
-        Scanner scanner = new Scanner(System.in);
+
         return scanner.nextInt();
     }
 
     private String podajTrescWiadomosci() {
-        Scanner scanner = new Scanner(System.in);
+
         return scanner.nextLine();
     }
     private String podajNazwe() {
-        Scanner scanner = new Scanner(System.in);
+
         return scanner.nextLine();
     }
 
     private boolean czyKupicBilet() {
 
-        Scanner scanner = new Scanner(System.in);
+
 
         System.out.println("""
 						Czy kupić bilet?
@@ -161,7 +170,8 @@ public class InterfejsUzytkownika {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner1 = new Scanner(System.in);
+
         InterfejsUzytkownika ui = new InterfejsUzytkownika();
         InterfejsPracownika pracownikUI = new InterfejsPracownika();
 
@@ -178,7 +188,7 @@ public class InterfejsUzytkownika {
 						3. Wyslij Zapytanie
 						""");
 
-                wybor = scanner.nextInt();
+                wybor = scanner1.nextInt();
 
                 switch (wybor) {
                     case 1:
@@ -208,7 +218,7 @@ public class InterfejsUzytkownika {
 						4. wyloguj
 						""");
 
-                wybor = scanner.nextInt();
+                wybor = scanner1.nextInt();
 
                 switch (wybor) {
                     case 1:

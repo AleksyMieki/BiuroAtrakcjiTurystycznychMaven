@@ -15,7 +15,7 @@ public class MenedzerWiadomosci {
         if(zgloszenie.getTrescWiadomosci() == null){
             throw new NullPointerException();
         }
-        System.out.print("wyslano wiadomosc o podanej tresci " + zgloszenie.getTrescWiadomosci() + "\n");
+        System.out.println("wyslano wiadomosc o podanej tresci " + zgloszenie.getTrescWiadomosci());
     }
     public boolean sprawdzenieMaila(String mail) {
 

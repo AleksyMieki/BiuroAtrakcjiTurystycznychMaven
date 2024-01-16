@@ -60,7 +60,7 @@ class MenedzerWiadomosciTest implements TestExecutionExceptionHandler {
         System.setOut(new PrintStream(outputStream));
         instance.wyslijWiadomosc(zgloszenie);
         System.setOut(System.out);
-        assertEquals("wyslano wiadomosc o podanej tresci " + zgloszenie.getTrescWiadomosci() + "\n", outputStream.toString());
+        assertEquals("wyslano wiadomosc o podanej tresci " + zgloszenie.getTrescWiadomosci() + "\r\n", outputStream.toString());
     }
 
     @ParameterizedTest
