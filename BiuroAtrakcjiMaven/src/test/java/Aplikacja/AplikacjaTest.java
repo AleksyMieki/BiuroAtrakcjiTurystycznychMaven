@@ -1,8 +1,6 @@
 package Aplikacja;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestExecutionExceptionHandler;
@@ -10,14 +8,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class AplikacjaTest implements TestExecutionExceptionHandler {
     static Aplikacja instance;
     static DaneTestowe daneTestowe;
@@ -41,32 +37,33 @@ class AplikacjaTest implements TestExecutionExceptionHandler {
     }
 
 
-    // csv
     // TestMethodOrder(OrderAnnotation.class) i  Order,
 
-    @Test
+    @Order(1)
+    @ParameterizedTest
+    @CsvSource({"niemail", ",", "cos@gmail.pl", "sadada@asdasd.pl"})
     @ExtendWith(AplikacjaTest.class)
-    void testyUtworzZgloszenieBounds() {
+    void testyUtworzZgloszenieBounds(String email) {
         // tworzymy wszystkie możliwe kombinacje emaili, tematow i tresci z klasy DaneTestowe
-        for (String email : daneTestowe.maile) {
-            for (String temat : daneTestowe.tytulyMaili) {
-                for (String tresc : daneTestowe.tresciMaili) {
-                    // sprawdzamy, czy wielkosc listyZgloszen zwiekszyl sie o 1
-                    int staraWielkoscListyZgloszen = instance.getListaZgloszen().size();
-                    instance.utworzZgloszenie(email, temat, tresc);
-                    int nowaWielkoscListyZgloszen = instance.getListaZgloszen().size();
-                    assertEquals(nowaWielkoscListyZgloszen, staraWielkoscListyZgloszen + 1);
+        for (String temat : daneTestowe.tytulyMaili) {
+            for (String tresc : daneTestowe.tresciMaili) {
+                // sprawdzamy, czy wielkosc listyZgloszen zwiekszyl sie o 1
+                int staraWielkoscListyZgloszen = instance.getListaZgloszen().size();
+                instance.utworzZgloszenie(email, temat, tresc);
+                int nowaWielkoscListyZgloszen = instance.getListaZgloszen().size();
+                assertEquals(nowaWielkoscListyZgloszen, staraWielkoscListyZgloszen + 1);
 
-                    // sprawdzamy, czy ostatni element to ten nasz wlasnie dodany
-                    int lastIndex = instance.getListaZgloszen().size() - 1;
-                    assertEquals(instance.getListaZgloszen().get(lastIndex).getTemat(), temat);
-                    assertEquals(instance.getListaZgloszen().get(lastIndex).getEmail(), email);
-                    assertEquals(instance.getListaZgloszen().get(lastIndex).getTrescWiadomosci(), tresc);
-                }
+                // sprawdzamy, czy ostatni element to ten nasz wlasnie dodany
+                int lastIndex = instance.getListaZgloszen().size() - 1;
+                assertEquals(instance.getListaZgloszen().get(lastIndex).getTemat(), temat);
+                assertEquals(instance.getListaZgloszen().get(lastIndex).getEmail(), email);
+                assertEquals(instance.getListaZgloszen().get(lastIndex).getTrescWiadomosci(), tresc);
             }
         }
     }
 
+
+    @Order(2)
     @Test
     void testyUtworzZgloszenieCzasiID() {
         // sprawdza spójnosc danych (zgloszenie o wiekszym id jest wyslane pozniej)
@@ -82,6 +79,7 @@ class AplikacjaTest implements TestExecutionExceptionHandler {
         return IntStream.range(-2, 10);
     }
 
+    @Order(3)
     @ParameterizedTest
     @MethodSource("intProvider")
     @ExtendWith(AplikacjaTest.class)
