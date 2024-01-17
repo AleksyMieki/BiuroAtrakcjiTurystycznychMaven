@@ -1,6 +1,7 @@
 package Aplikacja;
 
 import mockit.Mocked;
+import org.hibernate.jdbc.Expectation;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,12 @@ import org.junit.jupiter.api.extension.TestExecutionExceptionHandler;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import mockit.Mocked;
+import mockit.Expectations;
+import mockit.Tested;
+import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Map;
@@ -27,7 +33,6 @@ public class MenedzerWiadomosciTest implements TestExecutionExceptionHandler {
     @Mocked
     Zgloszenie zgloszenie;
 
-
     @Override
     public void handleTestExecutionException(ExtensionContext context, Throwable throwable)
             throws Throwable {
@@ -42,6 +47,74 @@ public class MenedzerWiadomosciTest implements TestExecutionExceptionHandler {
     static void setUp() {
         daneTestowe = new DaneTestowe();
         instance = new MenedzerWiadomosci();
+    }
+
+    @Test
+    void mockTestSprawdzenieTematu()
+    {
+        new Expectations() {{
+            zgloszenie.getTemat();
+            result = "zwrot biletu";
+        }};
+
+        assertTrue(instance.sprawdzenieTematu(zgloszenie.getTemat()));
+    }
+
+    @Test
+    void mockTestSprawdzenieTematuFalse()
+    {
+        new Expectations() {{
+            zgloszenie.getTemat();
+            result = "zwrot";
+        }};
+
+        assertFalse(instance.sprawdzenieTematu(zgloszenie.getTemat()));
+    }
+
+    @Test
+    void mockTestSprawdzenieMaila()
+    {
+        new Expectations()
+        {{
+            zgloszenie.getEmail();
+            result = "uzytkownik@domain.com";
+        }};
+
+        assertTrue(instance.sprawdzenieMaila(zgloszenie.getEmail()));
+    }
+
+    @Test
+    void mockTestWyslijWiadomosc()
+    {
+        new Expectations()
+        {{
+            zgloszenie.getTrescWiadomosci();
+            result = "tresc wiadomosci";
+        }};
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        instance.wyslijWiadomosc(zgloszenie);
+        System.setOut(System.out);
+
+        assertEquals("wyslano wiadomosc o podanej tresci " + zgloszenie.getTrescWiadomosci() + "\r\n", outputStream.toString());
+    }
+
+    @Test
+    void mockTestWyslijWiadomoscPracownik()
+    {
+        new Expectations()
+        {{
+            zgloszenie.getTemat();
+            result = "temat";
+        }};
+        String wiadomosc = "wiadomosc";
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        instance.wyslijWiadomoscPracownik(zgloszenie, wiadomosc);
+        System.setOut(System.out);
+
+        assertEquals("wyslalem wiadomosc " + wiadomosc + " na zgloszenie o tym temacie: " + zgloszenie.getTemat() +"\r\n", outputStream.toString());
     }
 
     @Test

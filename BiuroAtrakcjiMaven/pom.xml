@@ -26,6 +26,12 @@
             <version>1.8.2</version> <!-- Use the latest version -->
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.1.7.Final</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <packaging>jar</packaging>
     <properties>

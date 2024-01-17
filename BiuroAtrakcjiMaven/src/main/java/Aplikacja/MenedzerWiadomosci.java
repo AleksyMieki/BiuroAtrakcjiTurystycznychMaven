@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class MenedzerWiadomosci {
+
     public void wyslijWiadomoscPracownik(Zgloszenie zgloszenie, String wiadomosc) {
 
         System.out.println("wyslalem wiadomosc " + wiadomosc + " na zgloszenie o tym temacie: " + zgloszenie.getTemat());
