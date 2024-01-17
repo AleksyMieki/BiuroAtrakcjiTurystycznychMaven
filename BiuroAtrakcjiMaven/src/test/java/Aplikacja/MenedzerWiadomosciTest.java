@@ -1,6 +1,8 @@
 package Aplikacja;
 
+import mockit.Mocked;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -16,10 +18,15 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Tag("Entity")
 public class MenedzerWiadomosciTest implements TestExecutionExceptionHandler {
 
     static DaneTestowe daneTestowe;
     static MenedzerWiadomosci instance;
+
+    @Mocked
+    Zgloszenie zgloszenie;
+
 
     @Override
     public void handleTestExecutionException(ExtensionContext context, Throwable throwable)
@@ -61,7 +68,7 @@ public class MenedzerWiadomosciTest implements TestExecutionExceptionHandler {
         instance.wyslijWiadomosc(zgloszenie);
         System.setOut(System.out);
 //        assertEquals("wyslano wiadomosc o podanej tresci " + zgloszenie.getTrescWiadomosci() + "\r\n", outputStream.toString());
-        assertEquals("wyslano wiadomosc o podanej tresci " + zgloszenie.getTrescWiadomosci() + "\n", outputStream.toString());
+        assertEquals("wyslano wiadomosc o podanej tresci " + zgloszenie.getTrescWiadomosci() + "\r\n", outputStream.toString());
     }
 
     @ParameterizedTest

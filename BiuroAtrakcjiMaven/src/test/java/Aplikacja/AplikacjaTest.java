@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Tag("Control")
 public class AplikacjaTest implements TestExecutionExceptionHandler {
     static Aplikacja instance;
     static DaneTestowe daneTestowe;
