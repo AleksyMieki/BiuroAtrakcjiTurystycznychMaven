@@ -1,4 +1,6 @@
 import Aplikacja.AplikacjaTest;
+import Aplikacja.KasaBiletowa;
+import Aplikacja.KasaBiletowaTest;
 import Aplikacja.MenedzerWiadomosciTest;
 import Prezentacja.InterfejsPracownikaTest;
 import org.junit.platform.suite.api.SelectClasses;
@@ -10,6 +12,7 @@ import org.junit.platform.suite.api.Suite;
         InterfejsPracownikaTest.class,
         MenedzerWiadomosciTest.class,
         InterfejsPracownikaTest.class,
+        KasaBiletowaTest.class
         // Add more test classes here
 })
 

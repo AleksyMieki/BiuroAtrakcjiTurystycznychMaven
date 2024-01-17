@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Tag;
 import static org.junit.jupiter.api.Assertions.*;
 
-class KasaBiletowaTest {
+public class KasaBiletowaTest {
 
     @Tested
     KasaBiletowa kasaBiletowa;

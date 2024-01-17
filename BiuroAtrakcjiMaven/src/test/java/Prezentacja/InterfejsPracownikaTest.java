@@ -53,8 +53,8 @@ public class InterfejsPracownikaTest implements TestExecutionExceptionHandler {
         System.setOut(new PrintStream(outputStream));
         instance.wyswietlDaneAtrakcji(atrakcja);
         System.setOut(System.out);
-        assertEquals("OTO DANE ATRAKCJI\n" + atrakcja.getNazwa() + "\n" + atrakcja.getCena() + "\n"
-                + atrakcja.getDataAtrakcji() + "\n" + atrakcja.getLokalizacja() + "\n", outputStream.toString());
+        assertEquals("OTO DANE ATRAKCJI\r\n" + atrakcja.getNazwa() + "\r\n" + atrakcja.getCena() + "\r\n"
+                + atrakcja.getDataAtrakcji() + "\r\n" + atrakcja.getLokalizacja() + "\r\n", outputStream.toString());
     }
 
     // na poczatku są 3 bilety
