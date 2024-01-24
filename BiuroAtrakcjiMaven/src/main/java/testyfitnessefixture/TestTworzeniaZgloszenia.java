@@ -35,4 +35,6 @@ public class TestTworzeniaZgloszenia extends ColumnFixture {
     public int liczbaZgloszen(){
         return SetUp.aplikacja.getListaZgloszen().size();
     }
+
+
 }

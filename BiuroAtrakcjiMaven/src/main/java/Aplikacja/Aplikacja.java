@@ -61,6 +61,9 @@ public class Aplikacja {
     public ArrayList<Zgloszenie> getListaZgloszen() {
         return this.listaZgloszen;
     }
+    public ArrayList<Atrakcja> getListaAtrakcji() {
+        return this.listaAtrakcji;
+    }
 
     public void usunAtrakcje(Atrakcja atrakcja) {
         listaAtrakcji.remove(atrakcja);
@@ -96,6 +99,15 @@ public class Aplikacja {
         Zgloszenie zgloszenie = new Zgloszenie(temat, email, listaZgloszen.size() + 1, wiadomosc, dataWyslania);
         listaZgloszen.add(zgloszenie);
         menedzerWiadomosci.wyslijWiadomosc(zgloszenie);
+
+    }
+
+    public void utworzAtrakcjePoAtrybutach(String nazwa, float cena, String dataAtrakcji, String lokalizacja) {
+
+        Atrakcja atrakcja = new Atrakcja(nazwa, cena,
+                dataAtrakcji, lokalizacja);
+
+        listaAtrakcji.add(atrakcja);
 
     }
 
