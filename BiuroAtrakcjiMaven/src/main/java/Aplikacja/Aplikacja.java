@@ -21,14 +21,14 @@ public class Aplikacja {
 
     private Aplikacja() {
         Dane dane = new Dane("piza", 1, "2023-12-03 10:00:00", "aaa");
-        Dane dane2 = new Dane("luwr", 1, "2024-01-17 13:00:00", "aaa");
+        Dane dane2 = new Dane("swiebodzin", 1, "2024-01-17 13:00:00", "aaa");
         Dane dane3 = new Dane("mona", 1, "2025-01-20 14:00:00", "aaa");
         listaAtrakcji.add(new Atrakcja(dane));
         listaAtrakcji.add(new Atrakcja(dane2));
         listaAtrakcji.add(new Atrakcja(dane3));
-        Zgloszenie zgloszenie = new Zgloszenie("zwrot biletu", "a@.pl", 1, "tresc wiadomosci numer 1", "2023-12-02 00:00:00");
-        Zgloszenie zgloszenie2 = new Zgloszenie("czy jest promka?", "a@.pl", 2, "tresc wiadomosci numer 2", "2023-12-02 00:00:00");
-        Zgloszenie zgloszenie3 = new Zgloszenie("kiedy otwarcie", "a@.pl", 3, "tresc wiadomosci numer 3", "2024-01-02 00:00:00");
+        Zgloszenie zgloszenie = new Zgloszenie("zwrot biletu", "a@.pl", 0, "tresc wiadomosci numer 1", "2023-12-02 00:00:00");
+        Zgloszenie zgloszenie2 = new Zgloszenie("czy jest promka?", "a@.pl", 1, "tresc wiadomosci numer 2", "2023-12-02 00:00:00");
+        Zgloszenie zgloszenie3 = new Zgloszenie("kiedy otwarcie", "a@.pl", 2, "tresc wiadomosci numer 3", "2024-01-02 00:00:00");
 
         kasaBiletowa.kupBilet(listaAtrakcji.get(0));
         kasaBiletowa.kupBilet(listaAtrakcji.get(1));
@@ -103,12 +103,10 @@ public class Aplikacja {
     }
 
     public void utworzAtrakcjePoAtrybutach(String nazwa, float cena, String dataAtrakcji, String lokalizacja) {
-
         Atrakcja atrakcja = new Atrakcja(nazwa, cena,
                 dataAtrakcji, lokalizacja);
 
         listaAtrakcji.add(atrakcja);
-
     }
 
     public void utworzAtrakcje(Dane atrybutyAtrakcji) {
@@ -119,5 +117,4 @@ public class Aplikacja {
         listaAtrakcji.add(atrakcja);
 
     }
-
 }
